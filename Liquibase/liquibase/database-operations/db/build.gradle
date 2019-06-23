@@ -1,0 +1,27 @@
+description = 'The liquibase project'
+version '1.0'
+
+buildscript {
+    dependencies {
+        //A Gradle plugin for running the Liquibase database upgrade tool.
+        classpath 'org.liquibase:liquibase-gradle-plugin:1.2.4'
+        //A Gradle plugin for running the PostgreSQL
+        classpath group: 'mysql', name: 'mysql-connector-java', version: '8.0.15'
+    }
+}
+
+apply plugin: 'org.liquibase.gradle'
+
+liquibase {
+    activities {
+        main {
+            println "Connect to: $project.dbLiquibaseServer:$project.dbLiquibasePort/$project.dbLiquibaseDatabase"
+
+            changeLogFile "C:\\Users\\W10\\Desktop\\Java\\Mano darbai\\DuomenuBazes\\Liquibase\\liquibase\\database-operations\\db\\src\\main\\resources\\changelog-example.xml"
+            url "jdbc:mysql://localhost:3307/liquibase?serverTimezone=UTC"
+            username "root"
+            password "akvile"
+        }
+    }
+    runList = 'main'
+}

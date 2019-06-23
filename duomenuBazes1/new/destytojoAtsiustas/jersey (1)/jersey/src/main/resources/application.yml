@@ -1,0 +1,28 @@
+server:
+  port: 8086
+  servlet:
+    context-path: /api
+
+spring:
+  main:
+    banner-mode: "off"
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  datasource:
+    platform: h2
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:mem:cs;MODE=PostgreSQL
+
+  # Spring Data JPA configuration
+  jpa:
+    hibernate:
+    # To be updated in real production usage!
+      ddl-auto: create-drop
+    show-sql: true
+
+logging:
+  level:
+    org:
+      springframework: ERROR

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<database name="world" schema="public" type="PostgreSQL - 9.5.8">
+   <tables>
+      <table name="city" numRows="4080" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="int4">
+            <child column="capital" foreignKey="country_capital_fkey" implied="false" onDeleteCascade="false" schema="public" table="country"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="name" nullable="false" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="countrycode" nullable="false" remarks="" size="3" type="bpchar">
+            <parent column="code" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="country"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="district" nullable="false" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="4" name="population" nullable="false" remarks="" size="10" type="int4"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="city_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="country" numRows="239" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="code" nullable="false" remarks="" size="3" type="bpchar">
+            <child column="countrycode" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="city"/>
+            <child column="countrycode" foreignKey="countrylanguage_countrycode_fkey" implied="false" onDeleteCascade="false" schema="public" table="countrylanguage"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="name" nullable="false" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="continent" nullable="false" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="3" name="region" nullable="false" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="8" id="4" name="surfacearea" nullable="false" remarks="" size="8" type="float4"/>
+         <column autoUpdated="false" digits="0" id="5" name="indepyear" nullable="true" remarks="" size="5" type="int2"/>
+         <column autoUpdated="false" digits="0" id="6" name="population" nullable="false" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="8" id="7" name="lifeexpectancy" nullable="true" remarks="" size="8" type="float4"/>
+         <column autoUpdated="false" digits="2" id="8" name="gnp" nullable="true" remarks="" size="10" type="numeric"/>
+         <column autoUpdated="false" digits="2" id="9" name="gnpold" nullable="true" remarks="" size="10" type="numeric"/>
+         <column autoUpdated="false" digits="0" id="10" name="localname" nullable="false" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="11" name="governmentform" nullable="false" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="12" name="headofstate" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="13" name="capital" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="country_capital_fkey" implied="false" onDeleteCascade="false" schema="public" table="city"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="14" name="code2" nullable="false" remarks="" size="2" type="bpchar"/>
+         <primaryKey column="code" sequenceNumberInPK="1"/>
+         <index name="country_pkey" unique="true">
+            <column ascending="true" name="code"/>
+         </index>
+      </table>
+      <table name="countrylanguage" numRows="984" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="countrycode" nullable="false" remarks="" size="3" type="bpchar">
+            <parent column="code" foreignKey="countrylanguage_countrycode_fkey" implied="false" onDeleteCascade="false" schema="public" table="country"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="language" nullable="false" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="isofficial" nullable="false" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="8" id="3" name="percentage" nullable="false" remarks="" size="8" type="float4"/>
+         <primaryKey column="countrycode" sequenceNumberInPK="1"/>
+         <primaryKey column="language" sequenceNumberInPK="2"/>
+         <index name="countrylanguage_pkey" unique="true">
+            <column ascending="true" name="countrycode"/>
+            <column ascending="true" name="language"/>
+         </index>
+      </table>
+   </tables>
+</database>
